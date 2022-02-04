@@ -1,16 +1,20 @@
 import React from 'react'
-import { ListGroup, ListGroupItem } from 'reactstrap'
+import { List, ListItemText, ListItem,Divider} from '@mui/material'
 
-const List = ({ expenses,}) => (
+
+const ListDisplay = ({ expenses,}) => (
   <div>
-    <ListGroup>
+    <List >
       {expenses.map(item => (
-        <ListGroupItem key={item.id}  >
-        <span>{item.name} - $ {item.amount}</span>
-        </ListGroupItem>
+      <div>
+      <ListItem key={item.id}  component="div" >
+      <ListItemText sx={{textAlign:'center'}}>{item.name} - $ {item.amount}</ListItemText>
+      </ListItem>
+      <Divider />
+      </div>
       ))}
-    </ListGroup>
+    </List>
   </div>
 )
 
-export default List
+export default ListDisplay

@@ -1,9 +1,13 @@
 import './App.css';
 import Logo from './logo.svg'
 import React, { useState , useEffect} from 'react'
-import { Container } from 'reactstrap'
 import Form from './component/form/form';
-import List from './component/list/list';
+import ListDisplay from './component/list/list';
+import { Typography,Box } from '@mui/material';
+import Chart from './component/chart/chart';
+
+
+
 
 
 
@@ -49,25 +53,39 @@ function App() {
     setExpenses([])
   }
 
+
+  const chartDataPoints = [
+    { label: 'Jan', value: 1 },
+    { label: 'Feb', value: 0 },
+    { label: 'Mar', value: 0 },
+    { label: 'Apr', value: 5 },
+    { label: 'May', value: 0 },
+    { label: 'Jun', value: 8 },
+    { label: 'Jul', value: 20 },
+    { label: 'Aug', value: 0 },
+    { label: 'Sep', value: 0 },
+    { label: 'Oct', value: 10 },
+    { label: 'Nov', value: 0 },
+    { label: 'Dec', value: 0 }
+  ]
   
   return (
-    <Container className="text-center">
-      
-        <h3 className="display-6">
+    <Box sx={{ textAlign: 'center', width:'80%', m:'0 auto', pt:'2rem'}}>
+        <Typography variant="h3" >
           Expense Tracker React App
           <img src={Logo} style={{ width: 50, height: 50 }} alt="react-logo" />
-        </h3>
-        <div>
-          <p>
+        </Typography>
+        <Box>
+          <Typography variant='subtitle1'>
             Total Expense:{' '}
-            <span className="text-success">
+            <Box component="span" sx={{color: 'green'}}>
               ${' '}
               {expenses.reduce((accumulator, currentValue) => {
                 return (accumulator += parseInt(currentValue.amount))
               }, 0)}
-            </span>
-          </p>
-        </div>
+            </Box>
+          </Typography>
+        </Box>
         <Form 
         name={name}
         amount={amount}
@@ -75,9 +93,9 @@ function App() {
         handleAmount={handleAmount}
         handleSubmitForm={handleSubmitForm} 
         handleDelete={handleDelete}/>
-        <List  expenses={expenses} />
-      
-    </Container>
+        <ListDisplay  expenses={expenses} /> 
+        <Chart chartsData={ chartDataPoints  } />
+    </Box>
   );
 }
 
